@@ -1,8 +1,6 @@
 import numpy as np
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
-from ipywidgets import interact, FloatSlider, VBox, HBox
-from IPython.display import display
 
 # --- SIR Model (Susceptible, Infected, Recovered) ---
 
