@@ -84,35 +84,6 @@ class EpidemicSimulator:
             'R': '#3b82f6'     # Blue
         }
     
-    def run_simulation1(self, parameters: Dict) -> Dict:
-        """
-        Placeholder for SciPy-based epidemic model simulation
-        In production, this would integrate with scipy.integrate.odeint
-        """
-        
-        # Extract parameters
-        beta = parameters['beta']
-        gamma = parameters['gamma']
-        sigma = parameters.get('sigma', 0.0)
-        initial_s = parameters['initial_s']
-        initial_i = parameters['initial_i']
-        initial_r = parameters['initial_r']
-        initial_e = parameters.get('initial_e', 0)
-        model_type = parameters['model_type']
-        time_range = parameters['time_range']
-        
-        # Generate time points
-        t = np.linspace(0, time_range, time_range + 1)
-        
-        # Mock simulation results (replace with actual SciPy integration)
-        results = self._generate_mock_results(t, parameters)
-        
-        return {
-            'time': t,
-            'results': results,
-            'parameters': parameters,
-            'statistics': self._calculate_statistics(results)
-        }
     def run_simulation(self, parameters: Dict) -> Dict:
         if parameters["model_type"] == "SIR":
             results = self._run_sir(parameters)
@@ -166,20 +137,6 @@ class EpidemicSimulator:
         return {"time": t, "S": S, "E": E, "I": I, "R": R}
 
 
-    def _calculate_statistics1(self, results: Dict) -> Dict:
-        """
-        Calculate key epidemic statistics
-        """
-        infected = results['I']
-        
-        return {
-            'peak_infected': np.max(infected),
-            'peak_day': np.argmax(infected),
-            'total_cases': np.sum(np.diff(results['R'], prepend=0)),
-            'attack_rate': (np.max(results['R']) / 
-                          (results['S'][0] + results['I'][0] + results['R'][0])) * 100,
-            'basic_reproduction_number': 2.5  # Placeholder calculation
-        }
     def _calculate_statistics(self, results: Dict, parameters: Dict) -> Dict:
         I = results["I"]
         peak_infected = int(np.max(I))
