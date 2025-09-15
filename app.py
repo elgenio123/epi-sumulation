@@ -440,19 +440,11 @@ def render_statistics_panel(results: Optional[Dict]):
             delta=f"{stats['total_cases']:,.0f} total cases"
         )
     
-    '''with col3:
-        st.metric(
-            "Basic R₀",
-            #f"{:.2f}",
-            stats['basic_reproduction_number'],
-            delta="Reproduction number"
-        )'''
-    
-    with col4:
+    with col3:
         infectious_period = 1 / params['gamma'] if params['gamma'] > 0 else 0
         st.metric(
             "Infectious Period",
-            f"{infectious_period:.1f} days",
+            f"{infectious_period:,.0f} days",
             delta="Average duration"
         )
     
